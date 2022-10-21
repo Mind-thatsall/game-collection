@@ -1,0 +1,30 @@
+.games__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 6px;
+}
+
+.sidebar {
+    width: 1000px;
+    margin-right: 15px;
+    height: 380px;
+    border-radius: 10px;
+    background-color: #0B1222;
+    flex: 1 0 1;
+    padding: 14px 15px 0 23px;
+    color: #C5C5C5;
+    font-family: "Montserrat";
+}
+
+.genreTitle {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 5px 0;
+}
+
+.list {
+    list-style: none;
+    li {
+        margin-bottom: 1px;
+    }
+}

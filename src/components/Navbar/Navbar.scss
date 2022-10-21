@@ -1,0 +1,43 @@
+.navbar__wrapper {
+    position: fixed;
+    width: 100vw;
+    padding: 0 200px 0 200px;
+    z-index: 10;
+}
+
+.navbar__interactions {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #B5C6D2;
+    font-family: "Montserrat";
+    padding: 0;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.logo {
+    font-weight: 800;
+}
+
+.searchBar {
+    width: 1000px;
+    background-color: #b5c6d280;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    border: 2px solid transparent;
+    color: #c6dbeb;
+    transition: border 0.10s linear;
+    font-family: "Montserrat";
+    font-weight: 500;
+    &:focus {
+        outline: none;
+        border: 2px solid #B5C6D2;
+        color: #cce2f3;
+    }
+
+}

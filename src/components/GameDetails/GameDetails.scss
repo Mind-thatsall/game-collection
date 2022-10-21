@@ -1,0 +1,134 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 40vh 17vh 30vh auto;
+    gap: 1.2vh 1.2vh;
+    color: #C5C5C5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    grid-template-areas:
+        "Photos Photos Photos Photos Characteristics Characteristics"
+        "Photos Photos Photos Photos Age Metascore"
+        "Description Description Description Description Requirements Requirements"
+        "Tags Tags Tags Tags Requirements Requirements";
+}
+
+.Characteristics {
+    grid-area: Characteristics;
+    background-color: #0B1222;
+    border-radius: 10px;
+    padding: 2.5vh 1.5vw;
+    font-size: 1.8vh;
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    gap: 0 2vw;
+    .first-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2vh 0;
+        width: 9vw;
+        margin-right: 1vw;
+    }
+    .second-column {
+        display: flex;
+        flex-direction: column;
+        gap: 2vh 0;
+        width: 10vw;
+    }
+    
+}
+
+.titleChar {
+    font-size: 1.5vh;
+    color: rgba(197, 197, 197, 0.3);
+    margin-bottom: 1.1vh;
+}
+
+.bigInfo {
+    font-size: 8vh;
+}
+
+
+.Age {
+    grid-area: Age;
+    background-color: #0B1222;
+    border-radius: 10px;
+    position: relative;
+    padding: 1.5vh 1.5vw;
+    
+}
+
+.Metascore {
+    grid-area: Metascore;
+    background-color: #0B1222;
+    border-radius: 10px;
+    padding: 1.5vh 1.5vw;
+    position: relative;
+}
+
+.bigInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.Photos {
+    grid-area: Photos;
+
+    .gamePicture {
+        border-radius: 10px;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.Description {
+    grid-area: Description;
+    background-color: #0B1222;
+    border-radius: 10px;
+    
+    padding: 2.5vh 1.5vw;
+}
+
+.Requirements {
+    grid-area: Requirements;
+    background-color: #0B1222;
+    border-radius: 10px;
+    padding: 2.5vh 1.5vw;
+}
+
+.levelRequire {
+    font-size: 1.5vh;
+    white-space: pre-line;
+}
+
+.titleRequire {
+    font-weight: 600;
+}
+
+.Tags {
+    grid-area: Tags;
+    background-color: #0B1222;
+    border-radius: 10px;
+    padding: 2.5vh 1.5vw;
+}
+
+.tags__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vh 1vh;
+}
+
+.tag {
+    border: 1px solid #C5C5C5;
+    border-radius: 0.3vh;
+    padding: 0.2vh 0.2vh;
+}
+
+@media screen and (min-width: 1200px) {
+    
+}

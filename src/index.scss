@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -14,7 +16,40 @@ h4 {
   margin: 0;
 }
 
+body {
+  background-color: #00091f;
+}
+
 img {
   border: none;
   max-width: 100%;
+}
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  padding: 0 12vw 0 12vw;
+}
+
+.page.Home {
+  background-image: url("./images/bgDarkMode.webp");
+  background-size: cover;
+}
+
+.page.Games {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  height: auto;
+  display: flex;
+}
+
+.page.GameDetails {
+  padding-top: 90px;
+  padding-bottom: 20px;
+  height: auto;
+}
+
+#link {
+  text-decoration: none;
 }
