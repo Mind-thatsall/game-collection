@@ -1,0 +1,30 @@
+.title {
+    position: absolute;
+    right: 45px;
+    padding: 0 200px;
+    font-family: sans-serif;
+    font-family: "Montserrat";
+    font-weight: 900;
+    width: 1100px;
+    text-align: right;
+    color: #B5C6D2;
+    top: 50%;
+    font-size: 80px;
+    transform: translateY(-50%);
+    line-height: 65px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.title__secondPart {
+    font-size: 60px;
+}
+
+.wordgradient {
+    background: linear-gradient(0, #138e97 20.96%, #015974 51.81%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    
+}
