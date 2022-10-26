@@ -7,19 +7,24 @@
 .sidebar {
     width: 1000px;
     margin-right: 15px;
-    height: 380px;
+    height: max-content;
     border-radius: 10px;
     background-color: #0B1222;
     flex: 1 0 1;
-    padding: 14px 15px 0 23px;
+    padding: 2vh 1.5vw;
     color: #C5C5C5;
     font-family: "Montserrat";
 }
 
-.genreTitle {
-    font-weight: 700;
-    font-size: 25px;
-    margin: 5px 0;
+.btnSidebar {
+    background-color: transparent;
+    border: none;
+    color: #C5C5C5;
+    font-size: 15px;
+    font-weight: 500;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .list {

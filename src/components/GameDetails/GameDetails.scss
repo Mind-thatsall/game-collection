@@ -1,7 +1,7 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 40vh 17vh 30vh auto;
+    grid-template-rows: 40vh 17vh auto auto;
     gap: 1.2vh 1.2vh;
     color: #C5C5C5;
     font-family: 'Montserrat', sans-serif;
@@ -120,13 +120,14 @@
 .tags__wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 1vh 1vh;
+    gap: 1vh 0.3vw;
 }
 
 .tag {
     border: 1px solid #C5C5C5;
     border-radius: 0.3vh;
-    padding: 0.2vh 0.2vh;
+    padding: 0.2vh 0.4vh;
+    font-size: 1.5vh;
 }
 
 @media screen and (min-width: 1200px) {

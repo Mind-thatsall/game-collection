@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 const AppContext = React.createContext();
 
 const GamesContext = ({ children }) => {
 	const [games, setGames] = useState([]);
 	const [gameDetails, setGameDetails] = useState();
 	const [loading, setLoading] = useState(false);
+	const [searchText, setSearchText] = useState("");
+	const [filterText, setFilterText] = useState("");
 
 	const fetchGames = async () => {
 		setLoading(true);
@@ -29,6 +31,90 @@ const GamesContext = ({ children }) => {
 		}
 	};
 
+	const fetchBySearch = useCallback(async () => {
+		setLoading(true);
+		console.log("one");
+		try {
+			const res = await fetch(
+				`https://api.rawg.io/api/games?key=${
+					import.meta.env.VITE_API_KEY
+				}&search=${searchText}`
+			);
+			const data = await res.json();
+
+			if (data) {
+				setGames(data.results);
+			} else {
+				setGames([]);
+			}
+
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+		}
+	}, [searchText]);
+
+	const fetchByFilter = useCallback(
+		async (filter) => {
+			console.log("one");
+			setLoading(true);
+			setGames([]);
+			try {
+				let fetchPlatform = filterText;
+				fetchPlatform === "pc"
+					? (fetchPlatform = "1")
+					: fetchPlatform === "xbox"
+					? (fetchPlatform = "3")
+					: fetchPlatform === "playstation"
+					? (fetchPlatform = "2")
+					: (fetchPlatform = "");
+
+				let fetchGenres = filterText;
+				fetchGenres === "rpg" ? (fetchGenres = "role-playing-games-rpg") : null;
+
+				let fetchTags = filterText;
+
+				const res = await fetch(
+					`https://api.rawg.io/api/games?key=${
+						import.meta.env.VITE_API_KEY
+					}&${filter}=${
+						filter === "parent_platforms"
+							? fetchPlatform
+							: filter === "genres"
+							? fetchGenres
+							: fetchTags
+					}`
+				);
+
+				console.log(
+					`https://api.rawg.io/api/games?key=${
+						import.meta.env.VITE_API_KEY
+					}&${filter}=${
+						filter === "parent_platforms"
+							? fetchPlatform
+							: filter === "genres"
+							? fetchGenres
+							: fetchTags
+					}`
+				);
+				const data = await res.json();
+
+				if (data) {
+					setGames(data.results);
+				} else {
+					setGames([]);
+				}
+
+				setLoading(false);
+			} catch (error) {
+				console.log(error);
+				setLoading(false);
+			}
+		},
+		[filterText]
+	);
+
 	const fetchGameDetails = async (slug) => {
 		try {
 			const res = await fetch(
@@ -37,7 +123,6 @@ const GamesContext = ({ children }) => {
 				}`
 			);
 			const data = await res.json();
-			console.log(data);
 
 			if (data) {
 				let allGameDetails = {
@@ -64,7 +149,7 @@ const GamesContext = ({ children }) => {
 					slug: data.slug,
 					requirementsPC: data.platforms.filter(
 						(platform) => platform.platform.name === "PC"
-					)[0].requirements,
+					),
 					age: data.esrb_rating === null ? "?" : data.esrb_rating.name,
 					tags: data.tags.map((tag) => {
 						return {
@@ -74,7 +159,6 @@ const GamesContext = ({ children }) => {
 					}),
 				};
 
-				console.log(allGameDetails);
 				setGameDetails(allGameDetails);
 			} else {
 				setGameDetails([]);
@@ -93,8 +177,14 @@ const GamesContext = ({ children }) => {
 				loading,
 				games,
 				gameDetails,
+				searchText,
+				filterText,
+				setSearchText,
+				setFilterText,
 				fetchGames,
 				fetchGameDetails,
+				fetchBySearch,
+				fetchByFilter,
 			}}>
 			{children}
 		</AppContext.Provider>

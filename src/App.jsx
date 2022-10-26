@@ -22,7 +22,15 @@ function App() {
 					}
 				/>
 				<Route path="*" element={<NoMatches />} />
+				<Route path="/games" element={<Games type={""} />} />
 				<Route path="/games/:id" element={<GameDetails />} />
+				<Route path="/games/search=:id" element={<Games type={"search"} />} />
+				<Route
+					path="/games/platforms=:id"
+					element={<Games type={"platforms"} />}
+				/>
+				<Route path="/games/genres=:id" element={<Games type={"genres"} />} />
+				<Route path="/games/tags=:id" element={<Games type={"tags"} />} />
 			</Routes>
 		</GamesContext>
 	);

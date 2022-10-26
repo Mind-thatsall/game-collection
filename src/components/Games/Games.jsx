@@ -1,39 +1,59 @@
 import { useContext, useEffect } from "react";
 import GameCard from "../GameCard/GameCard";
 import { AppContext } from "../../Fetching/FetchingData";
+import { useParams } from "react-router-dom";
 import "./Games.scss";
+import Sidebar from "./Sidebar";
 
-const Games = () => {
-	const { games, fetchGames } = useContext(AppContext);
+const Games = ({ type }) => {
+	const {
+		games,
+		fetchGames,
+		fetchBySearch,
+		fetchByFilter,
+		loading,
+		setSearchText,
+		setFilterText,
+	} = useContext(AppContext);
+	const { id } = useParams();
+	const idText = id !== undefined ? id.replaceAll("-", " ") : "";
+	console.log(games);
 
 	useEffect(() => {
-		fetchGames();
-	}, []);
+		setSearchText(idText);
+		setFilterText(idText);
+	}, [id]);
 
-	console.log(games);
+	useEffect(() => {
+		console.log(type);
+		switch (type) {
+			case (type = "search"):
+				setSearchText(idText);
+				fetchBySearch();
+				break;
+			case (type = undefined):
+				fetchGames();
+				break;
+			case (type = ""):
+				fetchGames();
+				break;
+			case (type = "platforms"):
+				fetchByFilter("parent_platforms");
+				break;
+			case (type = "genres"):
+				fetchByFilter("genres");
+				break;
+			case (type = "tags"):
+				fetchByFilter("tags");
+				break;
+		}
+	}, [fetchByFilter, fetchBySearch, type]);
+
+	if (loading) return "Loading...";
 
 	return (
 		<div className="page Games">
-			<div className="sidebar">
-				<h1 className="genreTitle">All Games</h1>
-				<h1 className="genreTitle">Platforms</h1>
-				<ul className="list">
-					<li>Xbox</li>
-					<li>PC</li>
-					<li>Playstation</li>
-				</ul>
-				<h1 className="genreTitle">Genres</h1>
-				<ul className="list">
-					<li>Action</li>
-					<li>Adventure</li>
-					<li>Shooter</li>
-					<li>RPG</li>
-					<li>Indie</li>
-					<li>Platformer</li>
-					<li>Racing</li>
-					<li>Sports</li>
-				</ul>
-			</div>
+			<Sidebar />
 			<div className="games__wrapper">
 				{games.map((game, index) => {
 					return <GameCard key={index} {...game} />;

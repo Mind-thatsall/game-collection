@@ -52,17 +52,17 @@ const GameCard = (game) => {
 	const isLongName =
 		game.name.length > 21 ? "14px" : game.name.length > 12 ? "20px" : "24px";
 
-	console.log(game);
-
 	return (
 		<Link to={`/games/${game.slug}`} className="gamecard__wrapper" id="link">
 			<img src={game.background_image} alt="" className="thumbnail" />
 			<div className="gamecard__informations">
 				<div className="platforms__metacritic">
 					<span className="platforms">
-						{game.parent_platforms.map((platform) => {
-							return <Platform {...platform.platform} />;
-						})}
+						{game.parent_platforms !== undefined
+							? game.parent_platforms.map((platform) => {
+									return <Platform {...platform.platform} />;
+							  })
+							: ""}
 					</span>
 					{game.metacritic === null ? (
 						<span></span>

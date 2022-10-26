@@ -1,31 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import "./GameDetails.scss";
 import { AppContext } from "../../Fetching/FetchingData";
-import { useParams } from "react-router-dom";
-
-const Age = ({ age }) => {
-	let ageNumber;
-
-	switch (age) {
-		case "Mature":
-			ageNumber = "17+";
-			break;
-		case "Teen":
-			ageNumber = "13+";
-			break;
-		case "Everyone 10+":
-			ageNumber = "10+";
-			break;
-		case "Everyone":
-			ageNumber = "0+";
-			break;
-		case "?":
-			ageNumber = "?";
-			break;
-	}
-
-	return <h1 className="bigInfo">{ageNumber}</h1>;
-};
+import { useParams, Link } from "react-router-dom";
 
 const GameDetails = () => {
 	const { gameDetails, fetchGameDetails } = useContext(AppContext);
@@ -34,6 +10,32 @@ const GameDetails = () => {
 	useEffect(() => {
 		fetchGameDetails(id);
 	}, []);
+
+	console.log(gameDetails);
+
+	const Age = ({ age }) => {
+		let ageNumber;
+
+		switch (age) {
+			case "Mature":
+				ageNumber = "17+";
+				break;
+			case "Teen":
+				ageNumber = "13+";
+				break;
+			case "Everyone 10+":
+				ageNumber = "10+";
+				break;
+			case "Everyone":
+				ageNumber = "0+";
+				break;
+			case "?":
+				ageNumber = "?";
+				break;
+		}
+
+		return <h1 className="bigInfo">{ageNumber}</h1>;
+	};
 
 	const Requirements = ({ requirements }) => {
 		if (requirements?.recommended) {
@@ -56,15 +58,24 @@ const GameDetails = () => {
 			<div className="container">
 				<div className="Characteristics">
 					<div className="first-column">
-						<div className="Genre char">
+						<div className="Genre">
 							<h2 className="titleChar">Genres</h2>
-							<span>{gameDetails?.genres.join(", ")}</span>
+							{gameDetails?.genres
+								.map((genre, index) => (
+									<Link
+										to={`/games/genres=${genre.toLowerCase()}`}
+										key={index}
+										id="link">
+										{genre}
+									</Link>
+								))
+								.reduce((prev, curr) => [prev, ", ", curr])}
 						</div>
-						<div className="ReleaseDate char">
+						<div className="ReleaseDate">
 							<h2 className="titleChar">Release Date</h2>
 							<span>{gameDetails?.releasedDate}</span>
 						</div>
-						<div className="Platforms char">
+						<div className="Platforms">
 							<h2 className="titleChar">Platforms</h2>
 							<span>
 								{gameDetails?.platforms
@@ -76,11 +87,11 @@ const GameDetails = () => {
 						</div>
 					</div>
 					<div className="second-column">
-						<div className="Developer char">
+						<div className="Developer">
 							<h2 className="titleChar">Developer</h2>
 							<span>{gameDetails?.developers.join(", ")}</span>
 						</div>
-						<div className="Publisher char">
+						<div className="Publisher">
 							<h2 className="titleChar">Publisher</h2>
 							<span>{gameDetails?.publishers.join(", ")}</span>
 						</div>
@@ -107,13 +118,19 @@ const GameDetails = () => {
 				</div>
 				<div className="Requirements">
 					<h2 className="titleChar">System requirements for PC</h2>
-					<Requirements requirements={gameDetails?.requirementsPC} />
+					<Requirements
+						requirements={gameDetails?.requirementsPC[0].requirements}
+					/>
 				</div>
 				<div className="Tags">
 					<h2 className="titleChar">Tags</h2>
 					<span className="tags__wrapper">
 						{gameDetails?.tags.map((tag) => {
-							return <span className="tag">{tag.name}</span>;
+							return (
+								<Link to={`/games/tags=${tag.name.toLowerCase()}`} id="link">
+									<span className="tag">{tag.name}</span>
+								</Link>
+							);
 						})}
 					</span>
 				</div>
