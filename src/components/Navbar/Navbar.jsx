@@ -36,8 +36,9 @@ const Navbar = () => {
 						ref={searchRef}
 					/>
 				</form>
-				<li>Games</li>
-				<li>M</li>
+				<Link to="/games" id="link">
+					<li>Games</li>
+				</Link>
 			</ul>
 		</navbar>
 	);
