@@ -8,19 +8,22 @@
     width: 1000px;
     margin-right: 15px;
     height: max-content;
-    border-radius: 10px;
-    background-color: #0B1222;
+    background: linear-gradient(to top, #0b122282, #0b1222 30%) padding-box,
+              linear-gradient(to top, #054B77, transparent 20%) border-box;
     flex: 1 0 1;
     padding: 2vh 1.5vw;
     color: #C5C5C5;
     font-family: "Montserrat";
+    border: 0.5vh solid transparent;
+    border-radius: 1vh;
+    width: 70vw;
 }
 
 .btnSidebar {
     background-color: transparent;
     border: none;
     color: #C5C5C5;
-    font-size: 15px;
+    font-size: 1em;
     font-weight: 500;
     &:hover {
         cursor: pointer;
@@ -31,5 +34,28 @@
     list-style: none;
     li {
         margin-bottom: 1px;
+    }
+}
+
+.genreTitle {
+    font-size: 1.4em;
+}
+
+.btnLoadMore {
+    position: fixed;
+    bottom: 4vh;
+    right: 4vh;
+    padding: 1vh 2vh;
+    border-radius: 1vh;
+    background-color: #054b77;
+    border: 1px solid white;
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.25s ease, background-color 0.25s ease;
+    &:hover {
+        background-color: white;
+        color: black;
     }
 }

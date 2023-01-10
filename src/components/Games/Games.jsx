@@ -14,6 +14,7 @@ const Games = ({ type }) => {
 		loading,
 		setSearchText,
 		setFilterText,
+		fetchMore,
 	} = useContext(AppContext);
 	const { id } = useParams();
 	const idText = id !== undefined ? id.replaceAll("-", " ") : "";
@@ -25,7 +26,6 @@ const Games = ({ type }) => {
 	}, [id]);
 
 	useEffect(() => {
-		console.log(type);
 		switch (type) {
 			case (type = "search"):
 				setSearchText(idText);
@@ -52,14 +52,19 @@ const Games = ({ type }) => {
 	if (loading) return "Loading...";
 
 	return (
-		<div className="page Games">
-			<Sidebar />
-			<div className="games__wrapper">
-				{games.map((game, index) => {
-					return <GameCard key={index} {...game} />;
-				})}
+		<>
+			<div className="page Games">
+				<Sidebar />
+				<div className="games__wrapper">
+					{games.map((game, index) => {
+						return <GameCard key={index} {...game} />;
+					})}
+				</div>
 			</div>
-		</div>
+			<button className="btnLoadMore" onClick={fetchMore}>
+				Load More
+			</button>
+		</>
 	);
 };
 

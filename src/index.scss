@@ -16,8 +16,13 @@ h4 {
   margin: 0;
 }
 
+html {
+  font-size: calc(16px + 0.39vw);
+}
+
 body {
   background-color: #00091f;
+  
 }
 
 img {
@@ -42,15 +47,19 @@ img {
   padding-bottom: 50px;
   height: auto;
   display: flex;
+  background-image: url("./images/Games.jpg");
+  background-size: cover;
 }
 
 .page.GameDetails {
   padding-top: 90px;
   padding-bottom: 20px;
   height: auto;
+  background-image: url("./images/Games(1).jpg");
+  background-size: cover;
 }
 
 #link {
   text-decoration: none;
-  color: #B5C6D2;
+  color: #c5c5c5;
 }

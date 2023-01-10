@@ -24,7 +24,7 @@ const Navbar = () => {
 		<navbar className="navbar__wrapper">
 			<ul className="navbar__interactions">
 				<Link to="/" id="link">
-					<li className="logo">LOGO</li>
+					<li className="logo">G </li>
 				</Link>
 				<form onSubmit={handleSubmit}>
 					<input

@@ -1,16 +1,18 @@
 .gamecard__wrapper {
     width: 250px;
     height: 240px;
-    background-color: #0B1222;
+    background: linear-gradient(to top, #0b122282, #0b1222 30%) padding-box,
+              linear-gradient(to top, #054B77, transparent 50%) border-box;
     color: #C5C5C5;
     display: flex;
     justify-content: end;
     flex-direction: column;
-    padding: 0 23px 15px 23px;
-    border-radius: 8px;
+    padding: 0 1.6vw 1vh 1.6vw;
     position: relative;
     overflow: hidden;
     font-family: sans-serif;
+    border: 0.5vh solid transparent;
+    border-radius: 1vh;
 }
 
 .gamecard__informations {
@@ -18,6 +20,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding-top: 0.5vh;
 }
 
 .thumbnail {
@@ -59,9 +62,9 @@
 }
 
 .genres {
-    font-size: 9px;
+    font-size: 0.5em;
     .genre {
-        border: 1px solid #C5C5C5;
+        border: 1px solid #b5c6d293;
         padding: 1px 3px;
         border-radius: 4px;
         font-weight: 600;   

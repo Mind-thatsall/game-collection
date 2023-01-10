@@ -7,14 +7,16 @@ const GamesContext = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 	const [searchText, setSearchText] = useState("");
 	const [filterText, setFilterText] = useState("");
+	const [page, setPage] = useState(2);
 
 	const fetchGames = async () => {
 		setLoading(true);
 		try {
+			setPage(2);
 			const res = await fetch(
 				`https://api.rawg.io/api/games?key=${
 					import.meta.env.VITE_API_KEY
-				}&page=3`
+				}&page=1`
 			);
 			const data = await res.json();
 
@@ -31,9 +33,34 @@ const GamesContext = ({ children }) => {
 		}
 	};
 
+	const fetchMore = async () => {
+		try {
+			setPage(page + 1);
+			const res = await fetch(
+				`https://api.rawg.io/api/games?key=${
+					import.meta.env.VITE_API_KEY
+				}&page=${page}`
+			);
+			const data = await res.json();
+
+			let allGames = data.results;
+
+			if (data) {
+				setGames((oldGames) => [...oldGames, ...allGames]);
+				i++;
+			} else {
+				setGames([]);
+			}
+
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+		}
+	};
+
 	const fetchBySearch = useCallback(async () => {
 		setLoading(true);
-		console.log("one");
 		try {
 			const res = await fetch(
 				`https://api.rawg.io/api/games?key=${
@@ -57,18 +84,25 @@ const GamesContext = ({ children }) => {
 
 	const fetchByFilter = useCallback(
 		async (filter) => {
-			console.log("one");
 			setLoading(true);
 			setGames([]);
 			try {
-				let fetchPlatform = filterText;
-				fetchPlatform === "pc"
-					? (fetchPlatform = "1")
-					: fetchPlatform === "xbox"
-					? (fetchPlatform = "3")
-					: fetchPlatform === "playstation"
-					? (fetchPlatform = "2")
-					: (fetchPlatform = "");
+				let fetchPlatform = "";
+
+				switch (filterText) {
+					case "pc":
+						fetchPlatform = "1";
+						break;
+					case "xbox":
+						fetchPlatform = "3";
+						break;
+					case "playstation":
+						fetchPlatform = "2";
+						break;
+					default:
+						fetchPlatform = "";
+						break;
+				}
 
 				let fetchGenres = filterText;
 				fetchGenres === "rpg" ? (fetchGenres = "role-playing-games-rpg") : null;
@@ -87,17 +121,6 @@ const GamesContext = ({ children }) => {
 					}`
 				);
 
-				console.log(
-					`https://api.rawg.io/api/games?key=${
-						import.meta.env.VITE_API_KEY
-					}&${filter}=${
-						filter === "parent_platforms"
-							? fetchPlatform
-							: filter === "genres"
-							? fetchGenres
-							: fetchTags
-					}`
-				);
 				const data = await res.json();
 
 				if (data) {
@@ -185,6 +208,7 @@ const GamesContext = ({ children }) => {
 				fetchGameDetails,
 				fetchBySearch,
 				fetchByFilter,
+				fetchMore,
 			}}>
 			{children}
 		</AppContext.Provider>
