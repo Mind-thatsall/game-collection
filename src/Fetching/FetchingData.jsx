@@ -18,9 +18,7 @@ const GamesContext = ({ children }) => {
 					import.meta.env.VITE_API_KEY
 				}&page=1`,
 				{
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-					},
+					mode: "cors",
 				}
 			);
 			const data = await res.json();
