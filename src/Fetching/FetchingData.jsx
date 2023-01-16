@@ -16,7 +16,12 @@ const GamesContext = ({ children }) => {
 			const res = await fetch(
 				`https://api.rawg.io/api/games?key=${
 					import.meta.env.VITE_API_KEY
-				}&page=1`
+				}&page=1`,
+				{
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+					},
+				}
 			);
 			const data = await res.json();
 
