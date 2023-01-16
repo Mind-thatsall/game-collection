@@ -40,9 +40,9 @@ const GamesContext = ({ children }) => {
 		try {
 			setPage(page + 1);
 			const res = await fetch(
-				`https://api.rawg.io/api/games?key=${
-					import.meta.env.VITE_API_KEY
-				}&page=${page}`
+				`https://api.rawg.io/api/games?key=
+					e0185203527d4702985f0b3ce6b5ac06
+				&page=${page}`
 			);
 			const data = await res.json();
 
